@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FingerprintComparisonApp.MainPage"
+             Title="Comparação de Impressões Digitais">
+
+    <StackLayout Padding="20">
+        <Label Text="Selecione duas impressões digitais para comparar:" 
+               FontSize="20"
+               HorizontalOptions="Center" />
+
+        <Button Text="Selecionar Impressão Digital 1" 
+                Clicked="OnSelectImage1Clicked" />
+        <Label x:Name="LabelImage1" Text="Imagem 1: Nenhuma selecionada" />
+
+        <Button Text="Selecionar Impressão Digital 2" 
+                Clicked="OnSelectImage2Clicked" />
+        <Label x:Name="LabelImage2" Text="Imagem 2: Nenhuma selecionada" />
+
+        <Button Text="Comparar Impressões Digitais" 
+                Clicked="OnCompareFingerprintsClicked" 
+                IsEnabled="False" 
+                x:Name="ButtonCompare" />
+
+        <Label x:Name="LabelResult" Text="" FontSize="20" HorizontalOptions="Center" />
+    </StackLayout>
+</ContentPage>
