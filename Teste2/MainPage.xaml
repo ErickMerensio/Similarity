@@ -4,24 +4,40 @@
              x:Class="FingerprintComparisonApp.MainPage"
              Title="Comparação de Impressões Digitais">
 
-    <StackLayout Padding="20">
-        <Label Text="Selecione duas impressões digitais para comparar:" 
+    <StackLayout Padding="20" Spacing="20">
+        <!-- Título -->
+        <Label Text="Comparação de Impressões Digitais" 
+               FontSize="24"
+               HorizontalOptions="Center" 
+               FontAttributes="Bold" />
+
+        <!-- Botão para adicionar uma impressão digital ao banco -->
+        <Button Text="Adicionar Impressão Digital ao Banco" 
+                Clicked="OnAddFingerprintClicked" />
+
+        <!-- Seção de seleção de impressões digitais -->
+        <Label Text="Selecione uma impressão digital para comparar:" 
                FontSize="20"
                HorizontalOptions="Center" />
 
-        <Button Text="Selecionar Impressão Digital 1" 
+        <!-- Botão e Label para selecionar a primeira imagem -->
+        <Button Text="Selecionar Impressão Digital para Comparação" 
                 Clicked="OnSelectImage1Clicked" />
-        <Label x:Name="LabelImage1" Text="Imagem 1: Nenhuma selecionada" />
+        <Label x:Name="LabelImage1" Text="Imagem: Nenhuma selecionada" 
+               HorizontalOptions="Center" FontSize="16" />
 
-        <Button Text="Selecionar Impressão Digital 2" 
-                Clicked="OnSelectImage2Clicked" />
-        <Label x:Name="LabelImage2" Text="Imagem 2: Nenhuma selecionada" />
-
-        <Button Text="Comparar Impressões Digitais" 
+        <!-- Botão para comparar com o banco de dados -->
+        <Button Text="Comparar Impressão Digital com o Banco" 
                 Clicked="OnCompareFingerprintsClicked" 
                 IsEnabled="False" 
                 x:Name="ButtonCompare" />
 
-        <Label x:Name="LabelResult" Text="" FontSize="20" HorizontalOptions="Center" />
+        <!-- Resultado da comparação -->
+        <Label x:Name="LabelResult" Text="" 
+               FontSize="20" 
+               HorizontalOptions="Center" 
+               TextColor="Green" />
+
     </StackLayout>
 </ContentPage>
+

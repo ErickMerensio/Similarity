@@ -1,4 +1,6 @@
-﻿namespace Teste2
+﻿using FingerprintComparisonApp;
+
+namespace Teste2
 {
     public partial class App : Application
     {
@@ -6,7 +8,8 @@
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            MainPage = new NavigationPage(new MainPage());
+            SQLitePCL.Batteries_V2.Init();
         }
     }
 }
