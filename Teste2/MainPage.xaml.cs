@@ -56,10 +56,24 @@ namespace FingerprintComparisonApp
         private async void OnAddFingerprintClicked(object sender, EventArgs e)
         {
             string imagePath = await PickImageAsync(); // Seleciona uma imagem
+            string nome = EntryNome.Text;
+            string cargo = CargoPicker.SelectedItem?.ToString();
+            if (string.IsNullOrEmpty(nome) || string.IsNullOrEmpty(cargo))
+            {
+                await DisplayAlert("Erro", "Por favor, digite o nome e selecione o cargo.", "OK");
+                return;
+            }
+
+            imagePath = await PickImageAsync(); // Seleciona uma imagem
             if (!string.IsNullOrEmpty(imagePath))
             {
-                dbService.AddFingerprint(imagePath); // Adiciona ao banco de dados
+                // Adiciona a impressão digital junto com o nome e o cargo ao banco de dados
+                dbService.AddFingerprint(imagePath, nome, cargo);
                 await DisplayAlert("Sucesso", "Impressão digital adicionada ao banco de dados.", "OK");
+            }
+            else
+            {
+                await DisplayAlert("Erro", "Por favor, selecione uma imagem.", "OK");
             }
         }
 
@@ -138,11 +152,13 @@ namespace FingerprintComparisonApp
 
                 foreach (var fingerprint in fingerprints)
                 {
-                    bool isMatch = await CompareFingerprints(imagePath1, fingerprint); // Compara com as impressões armazenadas
+                    bool isMatch = await CompareFingerprints(imagePath1, fingerprint.ImagePath); // Compara com as impressões armazenadas
                     if (isMatch)
                     {
+                        string nome = fingerprint.Nome;
+                        string cargo = fingerprint.Cargo;
 
-                        await Navigation.PushAsync(new Teste());
+                        await Navigation.PushAsync(new Teste(nome, cargo)); // Passa nome e cargo para a página Teste
                         return;
                     }
                 }

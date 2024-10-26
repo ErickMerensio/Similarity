@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
 using System.IO;
+using static OpenCvSharp.ML.DTrees;
 
 public class DatabaseService
 {
@@ -21,6 +22,11 @@ public class DatabaseService
     {
         using (var connection = new SqliteConnection($"Data Source={dbPath}"))
         {
+            if (File.Exists(dbPath))
+            {
+                File.Delete(dbPath);
+            }
+
             connection.Open();
 
             // Cria a tabela Fingerprints
@@ -28,7 +34,9 @@ public class DatabaseService
             command.CommandText = @"
                 CREATE TABLE IF NOT EXISTS Fingerprints (
                     Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    ImagePath TEXT NOT NULL
+                    ImagePath TEXT NOT NULL,
+                    [Nome] TEXT,
+                    [Cargo] TEXT
                 )";
             command.ExecuteNonQuery();
 
@@ -61,40 +69,49 @@ public class DatabaseService
     }
 
     // Método para adicionar impressões digitais no banco de dados
-    public void AddFingerprint(string imagePath)
+    public void AddFingerprint(string imagePath, string nome, string cargo)
     {
         using (var connection = new SqliteConnection($"Data Source={dbPath}"))
         {
             connection.Open();
 
             var command = connection.CreateCommand();
-            command.CommandText = "INSERT INTO Fingerprints (ImagePath) VALUES ($imagePath)";
+            command.CommandText = "INSERT INTO Fingerprints (ImagePath, Nome, Cargo) VALUES ($imagePath, $nome, $cargo)";
             command.Parameters.AddWithValue("$imagePath", imagePath);
+            command.Parameters.AddWithValue("$nome", nome);
+            command.Parameters.AddWithValue("$cargo", cargo);
             command.ExecuteNonQuery();
         }
     }
 
     // Método para obter todas as impressões digitais do banco de dados
-    public List<string> GetAllFingerprints()
+    public List<(string ImagePath, string Nome, string Cargo)> GetAllFingerprints()
     {
-        List<string> fingerprints = new List<string>();
+        List<(string ImagePath, string Nome, string Cargo)> fingerprints = new List<(string, string, string)>();
 
         using (var connection = new SqliteConnection($"Data Source={dbPath}"))
         {
             connection.Open();
 
             var command = connection.CreateCommand();
-            command.CommandText = "SELECT ImagePath FROM Fingerprints";
+            command.CommandText = "SELECT ImagePath, Nome, Cargo FROM Fingerprints";
 
             using (var reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    fingerprints.Add(reader.GetString(0));
+                    string imagePath = reader.GetString(0);
+
+                    // Verificar se os valores são NULL antes de obter Nome e Cargo
+                    string nome = !reader.IsDBNull(1) ? reader.GetString(1) : string.Empty;
+                    string cargo = !reader.IsDBNull(2) ? reader.GetString(2) : string.Empty;
+
+                    fingerprints.Add((imagePath, nome, cargo));
                 }
             }
         }
 
         return fingerprints;
     }
+
 }

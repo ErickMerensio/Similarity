@@ -8,5 +8,14 @@
             Text="Acesso liberado!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+
+        <Label x:Name="NomeLabel" 
+       FontSize="20" 
+       HorizontalOptions="Center" />
+        
+        <Label x:Name="CargoLabel" 
+       FontSize="20" 
+       HorizontalOptions="Center" />
+        
     </VerticalStackLayout>
 </ContentPage>

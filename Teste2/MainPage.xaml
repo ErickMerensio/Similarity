@@ -11,6 +11,34 @@
                HorizontalOptions="Center" 
                FontAttributes="Bold" />
 
+        <Label Text="Adicionar seu Nome" 
+           FontSize="24"
+           HorizontalOptions="Center" 
+           FontAttributes="Bold" />
+
+        <!-- Campo para o nome -->
+        <Entry x:Name="EntryNome"
+   Placeholder="Digite seu nome"
+   FontSize="18"
+   HorizontalOptions="Fill" />
+
+        <!-- Seção de escolha de cargo -->
+        <Label Text="Escolha seu cargo:" 
+   FontSize="18"
+   HorizontalOptions="Center" />
+
+        <Picker x:Name="CargoPicker"
+    Title="Selecione o cargo">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Gerente</x:String>
+                    <x:String>Supervisor</x:String>
+                    <x:String>Funcionário</x:String>
+                    <x:String>Estagiário</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
         <!-- Botão para adicionar uma impressão digital ao banco -->
         <Button Text="Adicionar Impressão Digital ao Banco" 
                 Clicked="OnAddFingerprintClicked" />
