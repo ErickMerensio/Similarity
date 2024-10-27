@@ -1,71 +1,89 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FingerprintComparisonApp.MainPage"
              Title="Comparação de Impressões Digitais">
 
-    <StackLayout Padding="20" Spacing="20">
-        <!-- Título -->
-        <Label Text="Comparação de Impressões Digitais" 
-               FontSize="24"
-               HorizontalOptions="Center" 
-               FontAttributes="Bold" />
+    <AbsoluteLayout>
+        <!-- Imagem de tela cheia (inicialmente invisível) -->
+        <Image x:Name="FullScreenImage"
+               Aspect="AspectFill"
+               IsVisible="False"
+               AbsoluteLayout.LayoutBounds="0,0,1,1"
+               AbsoluteLayout.LayoutFlags="All" />
 
-        <Label Text="Adicionar seu Nome" 
-           FontSize="24"
-           HorizontalOptions="Center" 
-           FontAttributes="Bold" />
+        <!-- Layout Principal -->
+        <StackLayout Padding="20" Spacing="20" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" x:Name="MainContentLayout">
+            <!-- Título -->
+            <Label Text="Comparação de Impressões Digitais" 
+                   FontSize="24"
+                   HorizontalOptions="Center" 
+                   FontAttributes="Bold" />
 
-        <!-- Campo para o nome -->
-        <Entry x:Name="EntryNome"
-   Placeholder="Digite seu nome"
-   FontSize="18"
-   HorizontalOptions="Fill" />
+            <Label Text="Adicionar seu Nome" 
+                   FontSize="24"
+                   HorizontalOptions="Center" 
+                   FontAttributes="Bold" />
 
-        <!-- Seção de escolha de cargo -->
-        <Label Text="Escolha seu cargo:" 
-   FontSize="18"
-   HorizontalOptions="Center" />
+            <!-- Campo para o nome -->
+            <Entry x:Name="EntryNome"
+                   Placeholder="Digite seu nome"
+                   FontSize="18"
+                   HorizontalOptions="Fill" />
 
-        <Picker x:Name="CargoPicker"
-    Title="Selecione o cargo">
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Gerente</x:String>
-                    <x:String>Supervisor</x:String>
-                    <x:String>Funcionário</x:String>
-                    <x:String>Estagiário</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>
+            <!-- Seção de escolha de cargo -->
+            <Label Text="Escolha seu cargo:" 
+                   FontSize="18"
+                   HorizontalOptions="Center" />
 
-        <!-- Botão para adicionar uma impressão digital ao banco -->
-        <Button Text="Adicionar Impressão Digital ao Banco" 
-                Clicked="OnAddFingerprintClicked" />
+            <Picker x:Name="CargoPicker"
+                    Title="Selecione o cargo">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Gerente</x:String>
+                        <x:String>Supervisor</x:String>
+                        <x:String>Funcionário</x:String>
+                        <x:String>Estagiário</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
 
-        <!-- Seção de seleção de impressões digitais -->
-        <Label Text="Selecione uma impressão digital para comparar:" 
-               FontSize="20"
-               HorizontalOptions="Center" />
+            <!-- Botão para adicionar uma impressão digital ao banco -->
+            <Button Text="Adicionar Impressão Digital ao Banco" 
+                    Clicked="OnAddFingerprintClicked" />
 
-        <!-- Botão e Label para selecionar a primeira imagem -->
-        <Button Text="Selecionar Impressão Digital para Comparação" 
-                Clicked="OnSelectImage1Clicked" />
-        <Label x:Name="LabelImage1" Text="Imagem: Nenhuma selecionada" 
-               HorizontalOptions="Center" FontSize="16" />
+            <!-- Seção de seleção de impressões digitais -->
+            <Label Text="Selecione uma impressão digital para comparar:" 
+                   FontSize="20"
+                   HorizontalOptions="Center" />
 
-        <!-- Botão para comparar com o banco de dados -->
-        <Button Text="Comparar Impressão Digital com o Banco" 
-                Clicked="OnCompareFingerprintsClicked" 
-                IsEnabled="False" 
-                x:Name="ButtonCompare" />
+            <!-- Botão e Label para selecionar a primeira imagem -->
+            <Button Text="Selecionar Impressão Digital para Comparação" 
+                    Clicked="OnSelectImage1Clicked" />
+            <Label x:Name="LabelImage1" Text="Imagem: Nenhuma selecionada" 
+                   HorizontalOptions="Center" FontSize="16" />
 
-        <!-- Resultado da comparação -->
-        <Label x:Name="LabelResult" Text="" 
-               FontSize="20" 
-               HorizontalOptions="Center" 
-               TextColor="Green" />
 
-    </StackLayout>
+            <!-- Botão para comparar com o banco de dados -->
+            <Button Text="Comparar Impressão Digital com o Banco" 
+                    Clicked="OnCompareFingerprintsClicked" 
+                    IsEnabled="False" 
+                    x:Name="ButtonCompare" />
+
+            <!-- Imagem selecionada (miniatura) -->
+            <Image x:Name="ImageSelected"
+                   AbsoluteLayout.LayoutBounds="0,0,1,1"
+                   AbsoluteLayout.LayoutFlags="All"
+                   Aspect="AspectFit"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+
+            <!-- Resultado da comparação -->
+            <Label x:Name="LabelResult" Text="" 
+                   FontSize="20" 
+                   HorizontalOptions="Center" 
+                   TextColor="Green" />
+
+        </StackLayout>
+    </AbsoluteLayout>
 </ContentPage>
-
