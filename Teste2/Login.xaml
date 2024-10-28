@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FingerprintComparisonApp.Login"
+             Title="Login">
+
+    <AbsoluteLayout>
+        <!-- Imagem de tela cheia (inicialmente invisível) -->
+        <Image x:Name="FullScreenImage"
+             Aspect="AspectFill"
+             IsVisible="False"
+             AbsoluteLayout.LayoutBounds="0,0,1,1"
+             AbsoluteLayout.LayoutFlags="All" />
+        <!-- Layout Principal -->
+    <StackLayout Padding="20" Spacing="20" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" x:Name="MainContentLayout">
+        <!-- Título -->
+        <Label Text="Login" 
+                   FontSize="24"
+                   HorizontalOptions="Center" 
+                   FontAttributes="Bold" />
+
+        <Label Text="Adicionar seu Nome" 
+                   FontSize="24"
+                   HorizontalOptions="Center" 
+                   FontAttributes="Bold" />
+
+        <!-- Campo para o nome -->
+            <Entry x:Name="EntryNome"
+                   Placeholder="Digite seu nome"
+                   FontSize="18"
+                   HorizontalOptions="Fill" />
+
+            <!-- Seção de seleção de impressões digitais -->
+            <Label Text="Selecione uma impressão digital para comparar:" 
+            FontSize="20"
+            HorizontalOptions="Center" />
+
+            <Button Text="Selecionar Impressão Digital para Comparação" 
+                    Clicked="OnSelectImage1Clicked" />
+            <Label x:Name="LabelImage1"  Text="Imagem: Nenhuma selecionada"
+                   HorizontalOptions="Center" FontSize="16" />
+
+            <Button Text="Comparar Impressão Digital com o Banco" 
+                    Clicked="OnCompareFingerprintsClicked" 
+                    IsEnabled="False" 
+                    x:Name="ButtonCompare" />
+
+
+            <!-- Imagem selecionada (miniatura) -->
+            <Image x:Name="ImageSelected"
+                   AbsoluteLayout.LayoutBounds="0,0,1,1"
+                   AbsoluteLayout.LayoutFlags="All"
+                   Aspect="AspectFit"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+
+            <!-- Resultado da comparação -->
+            <Label x:Name="LabelResult" Text="" 
+                   FontSize="20" 
+                   HorizontalOptions="Center" 
+                   TextColor="Green" />
+
+            <Label x:Name="SelectedImageNameLabel"
+               
+               FontSize="16"
+               HorizontalOptions="Center" />
+
+        </StackLayout>
+    </AbsoluteLayout>
+</ContentPage>

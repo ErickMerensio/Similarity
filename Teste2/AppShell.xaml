@@ -13,8 +13,18 @@
         Route="MainPage" />
 
     <ShellContent
-     Title="Teste"
-     ContentTemplate="{DataTemplate local:Teste}"
-     Route="Teste" />
+     Title="AcessoLiberado"
+     ContentTemplate="{DataTemplate local:AcessoLiberado}"
+     Route="AcessoLiberado" />
+
+    <ShellContent
+     Title="Cadastro"
+     ContentTemplate="{DataTemplate local:Cadastro}"
+     Route="Cadastro" />
+
+    <ShellContent
+     Title="Login"
+     ContentTemplate="{DataTemplate local:Login}"
+     Route="Login" />
 
 </Shell>

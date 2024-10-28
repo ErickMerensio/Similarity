@@ -1,10 +1,14 @@
 ﻿using Microsoft.Data.Sqlite;
+using System;
+using System.Collections.Generic;
 using System.IO;
-using static OpenCvSharp.ML.DTrees;
 
 public class DatabaseService
 {
+    private static readonly Lazy<DatabaseService> _instance = new Lazy<DatabaseService>(() => new DatabaseService());
     private readonly string dbPath;
+    private readonly SqliteConnection connection;
+
     private readonly string[] sampleImages =
     {
         "Resources/Images/fingerprint1.jpeg",
@@ -12,49 +16,54 @@ public class DatabaseService
         "Resources/Images/fingerprint3.png"
     };
 
-    public DatabaseService()
+    private DatabaseService()
     {
         dbPath = Path.Combine(FileSystem.AppDataDirectory, "fingerprints.db");
+        connection = new SqliteConnection($"Data Source={dbPath}");
+
         InitializeDatabase();
     }
 
+    public static DatabaseService Instance => _instance.Value;
+
     private void InitializeDatabase()
     {
-        using (var connection = new SqliteConnection($"Data Source={dbPath}"))
+        try
         {
-            if (File.Exists(dbPath))
-            {
-                File.Delete(dbPath);
-            }
-
             connection.Open();
 
-            // Cria a tabela Fingerprints
             var command = connection.CreateCommand();
             command.CommandText = @"
                 CREATE TABLE IF NOT EXISTS Fingerprints (
                     Id INTEGER PRIMARY KEY AUTOINCREMENT,
                     ImagePath TEXT NOT NULL,
-                    [Nome] TEXT,
-                    [Cargo] TEXT
+                    Nome TEXT,
+                    Cargo TEXT
                 )";
             command.ExecuteNonQuery();
 
-            // Verifica se já existem impressões digitais no banco
+            // Verifica se há registros no banco
             command.CommandText = "SELECT COUNT(*) FROM Fingerprints";
             long count = (long)command.ExecuteScalar();
 
             if (count == 0)
             {
-                // Se não houver registros, insere as imagens de exemplo
                 AddSampleFingerprints();
             }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao inicializar o banco de dados: {ex.Message}");
+        }
+        finally
+        {
+            connection.Close(); // Fecha a conexão após a inicialização
         }
     }
 
     private void AddSampleFingerprints()
     {
-        using (var connection = new SqliteConnection($"Data Source={dbPath}"))
+        try
         {
             connection.Open();
 
@@ -66,12 +75,20 @@ public class DatabaseService
                 command.ExecuteNonQuery();
             }
         }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao adicionar amostras: {ex.Message}");
+        }
+        finally
+        {
+            connection.Close(); // Fecha a conexão após a adição de amostras
+        }
     }
 
     // Método para adicionar impressões digitais no banco de dados
     public void AddFingerprint(string imagePath, string nome, string cargo)
     {
-        using (var connection = new SqliteConnection($"Data Source={dbPath}"))
+        try
         {
             connection.Open();
 
@@ -82,6 +99,14 @@ public class DatabaseService
             command.Parameters.AddWithValue("$cargo", cargo);
             command.ExecuteNonQuery();
         }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao adicionar impressão digital: {ex.Message}");
+        }
+        finally
+        {
+            connection.Close();
+        }
     }
 
     // Método para obter todas as impressões digitais do banco de dados
@@ -89,7 +114,7 @@ public class DatabaseService
     {
         List<(string ImagePath, string Nome, string Cargo)> fingerprints = new List<(string, string, string)>();
 
-        using (var connection = new SqliteConnection($"Data Source={dbPath}"))
+        try
         {
             connection.Open();
 
@@ -101,8 +126,6 @@ public class DatabaseService
                 while (reader.Read())
                 {
                     string imagePath = reader.GetString(0);
-
-                    // Verificar se os valores são NULL antes de obter Nome e Cargo
                     string nome = !reader.IsDBNull(1) ? reader.GetString(1) : string.Empty;
                     string cargo = !reader.IsDBNull(2) ? reader.GetString(2) : string.Empty;
 
@@ -110,8 +133,15 @@ public class DatabaseService
                 }
             }
         }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao obter impressões digitais: {ex.Message}");
+        }
+        finally
+        {
+            connection.Close();
+        }
 
         return fingerprints;
     }
-
 }

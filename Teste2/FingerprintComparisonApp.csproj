@@ -75,13 +75,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Teste.xaml.cs">
-	    <DependentUpon>Teste.xaml</DependentUpon>
+	  <Compile Update="AcessoLiberado.xaml.cs">
+	    <DependentUpon>AcessoLiberado.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Teste.xaml">
+	  <MauiXaml Update="AcessoLiberado.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Cadastro.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Login.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
