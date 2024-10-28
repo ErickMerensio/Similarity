@@ -75,19 +75,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="AcessoLiberado.xaml.cs">
+	  <Compile Update="View\AcessoLiberado.xaml.cs">
 	    <DependentUpon>AcessoLiberado.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="AcessoLiberado.xaml">
+	  <MauiXaml Update="View\AcessoLiberado.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Cadastro.xaml">
+	  <MauiXaml Update="View\Cadastro.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Login.xaml">
+	  <MauiXaml Update="View\Login.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
