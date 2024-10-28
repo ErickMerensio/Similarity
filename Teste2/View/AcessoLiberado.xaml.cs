@@ -9,5 +9,10 @@ public partial class AcessoLiberado : ContentPage
         InitializeComponent();
         NomeLabel.Text = $"Nome: {nome}";
         CargoLabel.Text = $"Cargo: {cargo}";
+        NavigationPage.SetHasBackButton(this, false);
+    }
+    protected override bool OnBackButtonPressed()
+    {
+        return true;
     }
 }

@@ -40,7 +40,16 @@
             <Label x:Name="LabelImage1"  Text="Imagem: Nenhuma selecionada"
                    HorizontalOptions="Center" FontSize="16" />
 
-            <Button Text="Comparar Impressão Digital com o Banco" 
+            <Button 
+                Text="Biometria"
+                FontAttributes="Bold"
+                SemanticProperties.Hint="Click to authenticate with your fingerprint"
+                Clicked="OnBiometricClicked"
+                IsVisible="{OnPlatform Android=true, Default=false}"
+                />
+
+
+            <Button Text="Login" 
                     Clicked="OnCompareFingerprintsClicked" 
                     IsEnabled="False" 
                     x:Name="ButtonCompare" />

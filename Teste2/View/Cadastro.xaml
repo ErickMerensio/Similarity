@@ -42,8 +42,13 @@
         </Picker>
 
         <!-- Botão para adicionar uma impressão digital ao banco -->
-        <Button Text="Adicionar Impressão Digital ao Banco" 
-                    Clicked="OnAddFingerprintClicked" />
+        <Button Text="Adicionar Impressão Digital" 
+                    Clicked="OnSelectImage1Clicked" />
+
+        <Button x:Name="ButtonCadastrar" 
+                Text="Cadastrar" 
+                Clicked="OnAddFingerprintClicked"
+                IsEnabled="False" />
 
     </StackLayout>
 </ContentPage>

@@ -4,11 +4,13 @@ public partial class Cadastro : ContentPage
 {
     private readonly DatabaseService dbService;
     private string imagePath1;
+
     public Cadastro()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         dbService = DatabaseService.Instance;
     }
+
     private async Task<string> PickImageAsync()
     {
         try
@@ -37,29 +39,43 @@ public partial class Cadastro : ContentPage
         if (!string.IsNullOrEmpty(imagePath1))
         {
             imagePath1 = Path.GetFullPath(imagePath1);
-            //LabelImage1.Text = $"Imagem 1: {Path.GetFileName(imagePath1)}";
+            await DisplayAlert("Sucesso", "Impressão Digital adicionada com Sucesso!.", "OK");
+            ValidateForm(); 
         }
     }
+
+    private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
+    {
+        ValidateForm(); 
+    }
+
+    private void OnPickerSelectedIndexChanged(object sender, EventArgs e)
+    {
+        ValidateForm(); 
+    }
+
+    private void ValidateForm()
+    {
+        ButtonCadastrar.IsEnabled = !string.IsNullOrEmpty(EntryNome.Text) &&
+                                    CargoPicker.SelectedItem != null &&
+                                    !string.IsNullOrEmpty(imagePath1);
+    }
+
     private async void OnAddFingerprintClicked(object sender, EventArgs e)
     {
-        string imagePath = await PickImageAsync(); // Seleciona uma imagem
-        string nome = EntryNome.Text; // Certifique-se de que EntryNome está definido no XAML
-        string cargo = CargoPicker.SelectedItem?.ToString(); // Certifique-se de que CargoPicker está definido no XAML
-        if (string.IsNullOrEmpty(nome) || string.IsNullOrEmpty(cargo))
+        string nome = EntryNome.Text;
+        string cargo = CargoPicker.SelectedItem?.ToString();
+
+        if (string.IsNullOrEmpty(imagePath1))
         {
-            await DisplayAlert("Erro", "Por favor, digite o nome e selecione o cargo.", "OK");
+            await DisplayAlert("Erro", "Por favor, selecione uma imagem.", "OK");
             return;
         }
 
-        if (!string.IsNullOrEmpty(imagePath))
-        {
-            // Adiciona a impressão digital junto com o nome e o cargo ao banco de dados
-            dbService.AddFingerprint(imagePath, nome, cargo);
-            await DisplayAlert("Sucesso", "Impressão digital adicionada ao banco de dados.", "OK");
-        }
-        else
-        {
-            await DisplayAlert("Erro", "Por favor, selecione uma imagem.", "OK");
-        }
+        dbService.AddFingerprint(imagePath1, nome, cargo);
+        await DisplayAlert("Sucesso", "Cadastrado com Sucesso!", "OK");
+
+        // Volta para a MainPage
+        await Navigation.PopToRootAsync();
     }
 }

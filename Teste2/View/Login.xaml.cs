@@ -5,22 +5,45 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Size = OpenCvSharp.Size;
-
+using Plugin.Fingerprint.Abstractions;
 
 namespace FingerprintComparisonApp;
 
 public partial class Login : ContentPage
 {
     private readonly DatabaseService dbService;
+    private readonly IFingerprint fingerprint;
     private string selectedImagePath;
     private string imagePath1;
+
     public Login()
     {
         InitializeComponent();
         dbService = DatabaseService.Instance;
+        this.fingerprint = fingerprint;
     }
 
-    private async Task<string> PickImageAsync()
+#if ANDROID
+    async void OnBiometricClicked(object sender, EventArgs e)
+    {
+        var request = new AuthenticationRequestConfiguration("Validate that you have fingers", "Because without them you will not be able to access");
+        var result = await fingerprint.AuthenticateAsync(request);
+        if (result.Authenticated)
+        {
+            await DisplayAlert("Authenticate!", "Access Granted", "OK");
+        }
+        else
+        {
+            await DisplayAlert("Unauthenticated", "Access Denied", "OK");
+        }
+    }
+#else
+    void OnBiometricClicked(object sender, EventArgs e)
+    {       
+    }
+#endif
+
+    async Task<string> PickImageAsync()
     {
         try
         {
@@ -41,14 +64,15 @@ public partial class Login : ContentPage
             return null;
         }
     }
-    private async Task<Mat> CreateMatchImage(Mat img1, Mat img2, List<DMatch> goodMatches, KeyPoint[] keypoints1, KeyPoint[] keypoints2)
+
+    async Task<Mat> CreateMatchImage(Mat img1, Mat img2, List<DMatch> goodMatches, KeyPoint[] keypoints1, KeyPoint[] keypoints2)
     {
         Mat matchImage = new Mat();
         Cv2.DrawMatches(img1, keypoints1, img2, keypoints2, goodMatches, matchImage, flags: DrawMatchesFlags.NotDrawSinglePoints);
         return matchImage;
     }
 
-    private async void OnSelectImage1Clicked(object sender, EventArgs e)
+    async void OnSelectImage1Clicked(object sender, EventArgs e)
     {
         imagePath1 = await PickImageAsync();
         if (!string.IsNullOrEmpty(imagePath1))
@@ -59,7 +83,7 @@ public partial class Login : ContentPage
         }
     }
 
-    private async Task<bool> CompareFingerprintsAndShowMatches(string imagePath1, string imagePath2)
+    async Task<bool> CompareFingerprintsAndShowMatches(string imagePath1, string imagePath2)
     {
         try
         {
@@ -103,7 +127,7 @@ public partial class Login : ContentPage
                 string matchImagePath = Path.Combine(FileSystem.CacheDirectory, "matchImage.jpg");
                 matchImage.SaveImage(matchImagePath);
 
-                // Aqui você define a imagem de comparação como a fonte para FullScreenImage
+                // Define a imagem de comparação como a fonte para FullScreenImage
                 FullScreenImage.Source = ImageSource.FromFile(matchImagePath);
                 FullScreenImage.IsVisible = true; // Torna a imagem visível
                 MainContentLayout.IsVisible = false; // Oculta o layout principal
@@ -119,7 +143,7 @@ public partial class Login : ContentPage
         }
     }
 
-    private async void OnCompareFingerprintsClicked(object sender, EventArgs e)
+    async void OnCompareFingerprintsClicked(object sender, EventArgs e)
     {
         if (string.IsNullOrEmpty(EntryNome.Text))
         {
@@ -130,11 +154,10 @@ public partial class Login : ContentPage
         if (!string.IsNullOrEmpty(imagePath1))
         {
             var fingerprints = dbService.GetAllFingerprints();
-            bool accessGranted = false; // Variável para controlar o acesso
+            bool accessGranted = false;
 
             foreach (var fingerprint in fingerprints)
             {
-                // Verifica se o nome corresponde e tenta comparar a impressão digital
                 if (fingerprint.Nome == EntryNome.Text)
                 {
                     bool isMatch = await CompareFingerprintsAndShowMatches(imagePath1, fingerprint.ImagePath);
@@ -143,20 +166,16 @@ public partial class Login : ContentPage
                         accessGranted = true;
                         await Task.Delay(4000);
                         await Navigation.PushAsync(new AcessoLiberado(EntryNome.Text, fingerprint.Cargo));
-                        return; // Sai do loop após encontrar a primeira correspondência
+                        return;
                     }
                 }
             }
 
-            // Se o acesso não foi liberado
             if (!accessGranted)
             {
                 await DisplayAlert("Acesso Negado!", "Impressão digital ou nome não encontrado no banco de dados.", "OK");
-                FullScreenImage.IsVisible = false; // Oculta a imagem se o acesso for negado
+                FullScreenImage.IsVisible = false;
             }
         }
     }
 }
-
-
-    
