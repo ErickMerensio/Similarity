@@ -2,20 +2,40 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FingerprintComparisonApp.AcessoLiberado"
-             Title="AcessoLiberado">
-    <VerticalStackLayout>
+             Title="AcessoLiberado"
+             BackgroundColor="#DEE5D4"
+             >
+    <StackLayout VerticalOptions="Center">
         <Label 
             Text="Acesso liberado!"
             VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            HorizontalOptions="Center"
+            TextColor="black"
+            FontSize="30"
+            Margin="0,0,0,30"
+            />
 
         <Label x:Name="NomeLabel" 
        FontSize="20" 
-       HorizontalOptions="Center" />
+       HorizontalOptions="Center"
+               TextColor="black"
+               />
         
         <Label x:Name="CargoLabel" 
        FontSize="20" 
-       HorizontalOptions="Center" />
-        
-    </VerticalStackLayout>
+       HorizontalOptions="Center"
+               TextColor="black"
+               Margin="0,0,0,30"
+               />
+
+        <Button
+            Text="Voltar ao inicio"
+            WidthRequest="500"
+            BackgroundColor="#A1D6B2"
+            BorderWidth="2"
+            BorderColor="black"
+            Clicked="Button_Clicked"
+            />
+
+    </StackLayout>
 </ContentPage>

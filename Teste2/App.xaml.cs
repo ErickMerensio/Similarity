@@ -10,6 +10,7 @@ namespace Teste2
 
             MainPage = new NavigationPage(new MainPage());
             SQLitePCL.Batteries_V2.Init();
+
         }
     }
 }

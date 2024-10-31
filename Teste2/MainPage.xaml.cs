@@ -23,5 +23,10 @@ namespace FingerprintComparisonApp
             // Navega para a página de Login
             await Navigation.PushAsync(new Login());
         }
+
+        private void Button_Focused(object sender, FocusEventArgs e)
+        {
+
+        }
     }
 }
