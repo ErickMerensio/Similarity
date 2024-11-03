@@ -1,3 +1,5 @@
+using Microsoft.Maui.Controls.Shapes;
+
 namespace FingerprintComparisonApp;
 
 public partial class Cadastro : ContentPage
@@ -9,6 +11,7 @@ public partial class Cadastro : ContentPage
     {
         InitializeComponent();
         dbService = DatabaseService.Instance;
+        this.SizeChanged += OnPageSizeChanged;
     }
 
     private async Task<string> PickImageAsync()
@@ -38,7 +41,7 @@ public partial class Cadastro : ContentPage
         imagePath1 = await PickImageAsync();
         if (!string.IsNullOrEmpty(imagePath1))
         {
-            imagePath1 = Path.GetFullPath(imagePath1);
+            imagePath1 = System.IO.Path.GetFullPath(imagePath1);
             await DisplayAlert("Sucesso", "Impressão Digital adicionada com Sucesso!.", "OK");
             ValidateForm(); 
         }
@@ -77,5 +80,17 @@ public partial class Cadastro : ContentPage
 
         // Volta para a MainPage
         await Navigation.PopToRootAsync();
+    }
+
+    private void OnPageSizeChanged(object sender, EventArgs e)
+    {
+        // Definindo o WidthRequest do botão para 50% da largura da tela
+        labelCadastro.WidthRequest = this.Width * 0.8;
+        EntryNome.WidthRequest = this.Width * 0.8;
+        CargoPicker.WidthRequest = this.Width * 0.8;
+        ButtonAdicionar.WidthRequest = this.Width * 0.8;
+        ButtonCadastrar.WidthRequest = this.Width * 0.8;
+        framePicker.WidthRequest = this.Width * 0.8;
+        labelPicker.WidthRequest = this.Width * 0.8;
     }
 }

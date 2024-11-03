@@ -21,6 +21,7 @@ public partial class Login : ContentPage
         InitializeComponent();
         dbService = DatabaseService.Instance;
         this.fingerprint = fingerprint;
+        this.SizeChanged += OnPageSizeChanged;
     }
 
 #if ANDROID
@@ -127,7 +128,8 @@ public partial class Login : ContentPage
                 string matchImagePath = Path.Combine(FileSystem.CacheDirectory, "matchImage.jpg");
                 matchImage.SaveImage(matchImagePath);
 
-                // Define a imagem de comparação como a fonte para FullScreenImage
+                // Define a imagem de comparação como a
+                // e para FullScreenImage
                 FullScreenImage.Source = ImageSource.FromFile(matchImagePath);
                 FullScreenImage.IsVisible = true; // Torna a imagem visível
                 MainContentLayout.IsVisible = false; // Oculta o layout principal
@@ -177,5 +179,16 @@ public partial class Login : ContentPage
                 FullScreenImage.IsVisible = false;
             }
         }
+    }
+
+    private void OnPageSizeChanged(object sender, EventArgs e)
+    {
+        // Definindo o WidthRequest do botão para 50% da largura da tela
+        labelLogin.WidthRequest = this.Width * 0.8;
+        EntryNome.WidthRequest = this.Width * 0.8;
+        buttonSelecionar.WidthRequest = this.Width * 0.8;
+        LabelImage1.WidthRequest = this.Width * 0.8;
+        buttonBiometria.WidthRequest = this.Width * 0.8;
+        ButtonCompare.WidthRequest = this.Width * 0.8;
     }
 }

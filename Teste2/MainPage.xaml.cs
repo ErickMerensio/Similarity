@@ -8,6 +8,7 @@ namespace FingerprintComparisonApp
         public MainPage()
         {
             InitializeComponent();
+            this.SizeChanged += OnPageSizeChanged;
         }
 
         // Evento de clique do botão de cadastro
@@ -24,9 +25,13 @@ namespace FingerprintComparisonApp
             await Navigation.PushAsync(new Login());
         }
 
-        private void Button_Focused(object sender, FocusEventArgs e)
+        private void OnPageSizeChanged(object sender, EventArgs e)
         {
-
+            // Definindo o WidthRequest do botão para 50% da largura da tela
+            cadastroButton.WidthRequest = this.Width * 0.8;
+            loginButton.WidthRequest = this.Width * 0.8;
+            linha.WidthRequest = this.Width * 0.8;
         }
+
     }
 }

@@ -6,36 +6,58 @@
              BackgroundColor="#DEE5D4"
              >
     <StackLayout VerticalOptions="Center">
-        <Label 
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label 
+                x:Name="labelAcesso"
             Text="Acesso liberado!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"
             TextColor="black"
             FontSize="30"
             Margin="0,0,0,30"
+                Grid.Row="1"
+                MaximumWidthRequest="400"
             />
 
         <Label x:Name="NomeLabel" 
        FontSize="20" 
-       HorizontalOptions="Center"
                TextColor="black"
+               Grid.Row="2"
+               MaximumWidthRequest="400"
                />
         
         <Label x:Name="CargoLabel" 
        FontSize="20" 
-       HorizontalOptions="Center"
                TextColor="black"
                Margin="0,0,0,30"
+               Grid.Row="3"
+               MaximumWidthRequest="400"
                />
 
         <Button
+            x:Name="buttonBack"
             Text="Voltar ao inicio"
-            WidthRequest="500"
             BackgroundColor="#A1D6B2"
             BorderWidth="2"
             BorderColor="black"
             Clicked="Button_Clicked"
+            Grid.Row="4"
+            MaximumWidthRequest="400"
+            
             />
 
+        </Grid>
     </StackLayout>
 </ContentPage>

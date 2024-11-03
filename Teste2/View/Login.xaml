@@ -6,56 +6,85 @@
              BackgroundColor="#DEE5D4"
              >
 
-    <AbsoluteLayout>
-        <!-- Imagem de tela cheia (inicialmente invisível) -->
+        <!-- Layout Principal -->
+    <StackLayout VerticalOptions="Center">
         <Image x:Name="FullScreenImage"
              Aspect="AspectFill"
              IsVisible="False"
              AbsoluteLayout.LayoutBounds="0,0,1,1"
              AbsoluteLayout.LayoutFlags="All" />
-        <!-- Layout Principal -->
-    <StackLayout  AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" x:Name="MainContentLayout" VerticalOptions="Center">
-        <!-- Título -->
+    <StackLayout VerticalOptions="Center" x:Name="MainContentLayout">
+
+
+        <Grid RowSpacing="20">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Título -->
             <Label Text="Login" 
-                   FontSize="24"
-                   HorizontalOptions="Center" 
+                   x:Name="labelLogin"
+                   FontSize="24" 
                    FontAttributes="Bold"
                    TextColor="black"
                    Margin="0,0,0,20"
+                   Grid.Row="1"
+                   MaximumWidthRequest="500"
                    />
 
             <!-- Campo para o nome -->
             <Entry x:Name="EntryNome"
                    Placeholder="Digite seu nome"
                    FontSize="18"
-                   HorizontalOptions="Fill"
-                   WidthRequest="500"
                    Margin="0,0,0,20"
                    TextColor="black"
+                   Grid.Row="2"
+                   MaximumWidthRequest="500"
                    />
 
             <!-- Seção de seleção de impressões digitais -->
 
-            <Button Text="Selecionar Impressão Digital para Comparação" 
+            <Button Text="Selecionar Digital" 
+                    x:Name="buttonSelecionar"
                     Clicked="OnSelectImage1Clicked"
-                    WidthRequest="500"
                     BackgroundColor="#A1D6B2"
                     BorderWidth="2"
                     BorderColor="black"
                     Margin="0,0,0,20"
+                    Grid.Row="3"
+                    MaximumWidthRequest="500"
                     />
             <Label x:Name="LabelImage1"  Text="Imagem: Nenhuma selecionada"
-                   HorizontalOptions="Center" FontSize="16"
+                    FontSize="16"
                    Margin="0,0,0,20"
                    TextColor="black"
+                   Grid.Row="4"
+                   MaximumWidthRequest="500"
                    />
 
             <Button 
                 Text="Biometria"
+                x:Name="buttonBiometria"
                 FontAttributes="Bold"
                 SemanticProperties.Hint="Click to authenticate with your fingerprint"
                 Clicked="OnBiometricClicked"
                 IsVisible="{OnPlatform Android=true, Default=false}"
+                Grid.Row="5"
+                MaximumWidthRequest="500"
                 />
 
 
@@ -66,30 +95,30 @@
                     BorderColor="black"
                     BorderWidth="2"
                     BackgroundColor="#A1D6B2"
-                    WidthRequest="500"
                     TextColor="Black"
+                    Grid.Row="10"
+                    MaximumWidthRequest="500"
                     />
 
 
+
+    </Grid>
             <!-- Imagem selecionada (miniatura) -->
             <Image x:Name="ImageSelected"
                    AbsoluteLayout.LayoutBounds="0,0,1,1"
                    AbsoluteLayout.LayoutFlags="All"
                    Aspect="AspectFit"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Center" />
+                   
+                   />
 
             <!-- Resultado da comparação -->
             <Label x:Name="LabelResult" Text="" 
                    FontSize="20" 
-                   HorizontalOptions="Center" 
                    TextColor="Green" />
 
-            <Label x:Name="SelectedImageNameLabel"
-               
-               FontSize="16"
-               HorizontalOptions="Center" />
-
+            <Label x:Name="SelectedImageNameLabel"    
+               FontSize="16" />
         </StackLayout>
-    </AbsoluteLayout>
+    </StackLayout>
+
 </ContentPage>

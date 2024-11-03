@@ -8,60 +8,109 @@
 
 
         <!-- Layout Principal -->
-    <StackLayout Spacing="20" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" x:Name="MainContentLayout" VerticalOptions="Center">
+    <StackLayout VerticalOptions="Center">
         <!-- Título -->
-        <Label Text="Cadastro" 
+
+        <Grid RowSpacing="25">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label 
+                x:Name="labelCadastro"
+                Text="Cadastro" 
                    FontSize="24"
-                   HorizontalOptions="Center" 
                    FontAttributes="Bold" 
                    TextColor="black"
+                Grid.Column="1"
+                   Grid.Row="1"
+                MaximumWidthRequest="500"
                />
 
         <!-- Campo para o nome -->
         <Entry x:Name="EntryNome"
                    Placeholder="Digite seu nome"
                    FontSize="18"
-                   HorizontalOptions="Fill"
-                   WidthRequest="500"
                    PlaceholderColor="gray"
                TextColor="black"
+               Grid.Column="1"
+               Grid.Row="2"
+               MaximumWidthRequest="500"
                />
 
         <!-- Seção de escolha de cargo -->
 
-        <Label
-            Text="Selecione o cargo"
-                               FontSize="18"
-                   HorizontalOptions="Center" 
+            <Label FontFamily="Arial"
+                x:Name="labelPicker"
+                Text="Selecione o cargo" 
+                   FontSize="24"
                    FontAttributes="Bold" 
                    TextColor="black"
-            />
+                Grid.Column="1"
+                   Grid.Row="3"
+                   MaximumWidthRequest="500"
+               />
 
-        <Picker x:Name="CargoPicker"
-                    WidthRequest="500"  
-                TextColor="gray"
-                TitleColor="black"
-                SelectedItem="Gerente"
+
+            <Frame 
+                x:Name="framePicker"
+                HasShadow="False" 
+       BorderColor="Black" 
+       CornerRadius="5" 
+                   Padding="0"
+                Margin="0"
+                BackgroundColor="#DEE5D4"
+                  Grid.Row="4"
+                   Grid.Column="1"
+                MaximumWidthRequest="500"
+                   >
+
+                <Picker x:Name="CargoPicker" 
                 FontSize="20"
-                
+                Grid.Column="1"
+                        TextColor="Black"
+                        Grid.Row="4"
+                        SelectedIndex="0"
+                        TitleColor="black"
+                        MaximumWidthRequest="500"
                 >
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Gerente</x:String>
-                    <x:String>Supervisor</x:String>
-                    <x:String>Funcionário</x:String>
-                    <x:String>Estagiário</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Gerente</x:String>
+                            <x:String>Supervisor</x:String>
+                            <x:String>Funcionário</x:String>
+                            <x:String>Estagiário</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
 
-        <!-- Botão para adicionar uma impressão digital ao banco -->
-        <Button Text="Adicionar Impressão Digital" 
+            </Frame>
+
+            <!-- Botão para adicionar uma impressão digital ao banco -->
+        <Button 
+            x:Name="ButtonAdicionar"
+            Text="Adicionar Impressão Digital" 
                     Clicked="OnSelectImage1Clicked"
                     BackgroundColor="#A1D6B2"
                     BorderWidth="2"
                 BorderColor="black"
-                WidthRequest="500"
+            Grid.Column="1"
+                Grid.Row="8"
+            MaximumWidthRequest="500"
                 />
 
         <Button x:Name="ButtonCadastrar" 
@@ -70,8 +119,9 @@
                 IsEnabled="False"
                 BorderWidth="2"
                 BorderColor="black"
-                WidthRequest="500"
                 TextColor="black"
+                Grid.Row="9"
+                MaximumWidthRequest="500"
                 
                 >
             <Button.Style>
@@ -87,6 +137,8 @@
             </Button.Style>
 
         </Button>
+
+        </Grid>
 
     </StackLayout>
 </ContentPage>
