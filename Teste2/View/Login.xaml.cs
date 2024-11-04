@@ -12,7 +12,6 @@ namespace FingerprintComparisonApp;
 public partial class Login : ContentPage
 {
     private readonly DatabaseService dbService;
-    private readonly IFingerprint fingerprint;
     private string selectedImagePath;
     private string imagePath1;
 
@@ -20,29 +19,8 @@ public partial class Login : ContentPage
     {
         InitializeComponent();
         dbService = DatabaseService.Instance;
-        this.fingerprint = fingerprint;
         this.SizeChanged += OnPageSizeChanged;
     }
-
-#if ANDROID
-    async void OnBiometricClicked(object sender, EventArgs e)
-    {
-        var request = new AuthenticationRequestConfiguration("Validate that you have fingers", "Because without them you will not be able to access");
-        var result = await fingerprint.AuthenticateAsync(request);
-        if (result.Authenticated)
-        {
-            await DisplayAlert("Authenticate!", "Access Granted", "OK");
-        }
-        else
-        {
-            await DisplayAlert("Unauthenticated", "Access Denied", "OK");
-        }
-    }
-#else
-    void OnBiometricClicked(object sender, EventArgs e)
-    {       
-    }
-#endif
 
     async Task<string> PickImageAsync()
     {
@@ -188,7 +166,6 @@ public partial class Login : ContentPage
         EntryNome.WidthRequest = this.Width * 0.8;
         buttonSelecionar.WidthRequest = this.Width * 0.8;
         LabelImage1.WidthRequest = this.Width * 0.8;
-        buttonBiometria.WidthRequest = this.Width * 0.8;
         ButtonCompare.WidthRequest = this.Width * 0.8;
     }
 }

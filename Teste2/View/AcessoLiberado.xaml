@@ -3,60 +3,52 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FingerprintComparisonApp.AcessoLiberado"
              Title="AcessoLiberado"
-             BackgroundColor="#DEE5D4"
-             >
+             BackgroundColor="#DEE5D4">
     <StackLayout VerticalOptions="Center">
 
         <Grid>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Label 
-                x:Name="labelAcesso"
-            Text="Acesso liberado!"
-            TextColor="black"
-            FontSize="30"
-            Margin="0,0,0,30"
-                Grid.Row="1"
-                MaximumWidthRequest="400"
-            />
+            <Label x:Name="labelAcesso"
+                   Text="Acesso liberado!"
+                   TextColor="black"
+                   FontSize="30"
+                   Margin="0,0,0,30"
+                   Grid.Row="1"
+                   MaximumWidthRequest="400" />
 
-        <Label x:Name="NomeLabel" 
-       FontSize="20" 
-               TextColor="black"
-               Grid.Row="2"
-               MaximumWidthRequest="400"
-               />
-        
-        <Label x:Name="CargoLabel" 
-       FontSize="20" 
-               TextColor="black"
-               Margin="0,0,0,30"
-               Grid.Row="3"
-               MaximumWidthRequest="400"
-               />
+            <Label x:Name="NomeLabel"
+                   FontSize="20"
+                   TextColor="black"
+                   Grid.Row="2"
+                   MaximumWidthRequest="400" />
 
-        <Button
-            x:Name="buttonBack"
-            Text="Voltar ao inicio"
-            BackgroundColor="#A1D6B2"
-            BorderWidth="2"
-            BorderColor="black"
-            Clicked="Button_Clicked"
-            Grid.Row="4"
-            MaximumWidthRequest="400"
-            
-            />
+            <Label x:Name="CargoLabel"
+                   FontSize="20"
+                   TextColor="black"
+                   Margin="0,0,0,30"
+                   Grid.Row="3"
+                   MaximumWidthRequest="400" />
+
+            <Button x:Name="buttonBack"
+                    Text="Voltar ao inicio"
+                    BackgroundColor="#A1D6B2"
+                    BorderWidth="2"
+                    BorderColor="black"
+                    Clicked="Button_Clicked"
+                    Grid.Row="4"
+                    MaximumWidthRequest="400" />
 
         </Grid>
     </StackLayout>

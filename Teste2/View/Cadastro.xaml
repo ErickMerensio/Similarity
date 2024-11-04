@@ -3,91 +3,85 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FingerprintComparisonApp.Cadastro"
              Title="Cadastro"
-             BackgroundColor="#DEE5D4"
-             >
+             BackgroundColor="#DEE5D4">
 
 
-        <!-- Layout Principal -->
+    <!-- Layout Principal -->
     <StackLayout VerticalOptions="Center">
         <!-- Título -->
 
         <Grid RowSpacing="25">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Label 
-                x:Name="labelCadastro"
-                Text="Cadastro" 
+            <Label x:Name="labelCadastro"
+                   Text="Cadastro"
                    FontSize="24"
-                   FontAttributes="Bold" 
+                   FontAttributes="Bold"
                    TextColor="black"
-                Grid.Column="1"
+                   Grid.Row="0"
+                   MaximumWidthRequest="500" />
+
+            <!-- Campo para o nome -->
+            <Frame x:Name="frameNome"
+                   HasShadow="False"
+                   BorderColor="Black"
+                   CornerRadius="5"
+                   Padding="0"
+                   Margin="0"
+                   BackgroundColor="#DEE5D4"
                    Grid.Row="1"
-                MaximumWidthRequest="500"
-               />
+                   MaximumWidthRequest="500">
+                <Entry x:Name="EntryNome"
+                       Placeholder="Digite seu nome"
+                       FontSize="18"
+                       PlaceholderColor="gray"
+                       TextColor="black"
+                       Grid.Row="1"
+                       MaximumWidthRequest="500" />
+            </Frame>
 
-        <!-- Campo para o nome -->
-        <Entry x:Name="EntryNome"
-                   Placeholder="Digite seu nome"
-                   FontSize="18"
-                   PlaceholderColor="gray"
-               TextColor="black"
-               Grid.Column="1"
-               Grid.Row="2"
-               MaximumWidthRequest="500"
-               />
-
-        <!-- Seção de escolha de cargo -->
+            <!-- Seção de escolha de cargo -->
 
             <Label FontFamily="Arial"
-                x:Name="labelPicker"
-                Text="Selecione o cargo" 
+                   x:Name="labelPicker"
+                   Text="Selecione o cargo"
                    FontSize="24"
-                   FontAttributes="Bold" 
+                   FontAttributes="Bold"
                    TextColor="black"
-                Grid.Column="1"
-                   Grid.Row="3"
-                   MaximumWidthRequest="500"
-               />
+                   Grid.Row="2"
+                   MaximumWidthRequest="500" />
 
 
-            <Frame 
-                x:Name="framePicker"
-                HasShadow="False" 
-       BorderColor="Black" 
-       CornerRadius="5" 
+            <Frame x:Name="framePicker"
+                   HasShadow="False"
+                   BorderColor="Black"
+                   CornerRadius="5"
                    Padding="0"
-                Margin="0"
-                BackgroundColor="#DEE5D4"
-                  Grid.Row="4"
-                   Grid.Column="1"
-                MaximumWidthRequest="500"
-                   >
+                   Margin="0"
+                   BackgroundColor="#DEE5D4"
+                   Grid.Row="3"
+                   MaximumWidthRequest="500">
 
-                <Picker x:Name="CargoPicker" 
-                FontSize="20"
-                Grid.Column="1"
+                <Picker x:Name="CargoPicker"
+                        FontSize="20"
+                        Grid.Column="1"
                         TextColor="Black"
-                        Grid.Row="4"
-                        SelectedIndex="0"
+                        Grid.Row="3"
                         TitleColor="black"
-                        MaximumWidthRequest="500"
-                >
+                        MaximumWidthRequest="500">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
                             <x:String>Gerente</x:String>
@@ -101,42 +95,42 @@
             </Frame>
 
             <!-- Botão para adicionar uma impressão digital ao banco -->
-        <Button 
-            x:Name="ButtonAdicionar"
-            Text="Adicionar Impressão Digital" 
+            <Button x:Name="ButtonAdicionar"
+                    Text="Adicionar Impressão Digital"
                     Clicked="OnSelectImage1Clicked"
                     BackgroundColor="#A1D6B2"
                     BorderWidth="2"
-                BorderColor="black"
-            Grid.Column="1"
-                Grid.Row="8"
-            MaximumWidthRequest="500"
-                />
+                    TextColor="black"
+                    BorderColor="black"
+                    Grid.Row="4"
+                    MaximumWidthRequest="500" />
 
-        <Button x:Name="ButtonCadastrar" 
-                Text="Cadastrar" 
-                Clicked="OnAddFingerprintClicked"
-                IsEnabled="False"
-                BorderWidth="2"
-                BorderColor="black"
-                TextColor="black"
-                Grid.Row="9"
-                MaximumWidthRequest="500"
-                
-                >
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Setter Property="BackgroundColor" Value="Gray" />
-                    <!-- Cor padrão -->
-                    <Style.Triggers>
-                        <DataTrigger TargetType="Button" Binding="{Binding IsEnabled, Source={x:Reference ButtonCadastrar}}" Value="True">
-                            <Setter Property="BackgroundColor" Value="#A1D6B2" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
+            <Button x:Name="ButtonCadastrar"
+                    Text="Cadastrar"
+                    Clicked="OnAddFingerprintClicked"
+                    IsEnabled="False"
+                    BorderWidth="2"
+                    BorderColor="black"
+                    TextColor="black"
+                    Grid.Row="6"
+                    MaximumWidthRequest="500">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="BackgroundColor"
+                                Value="Gray" />
+                        <!-- Cor padrão -->
+                        <Style.Triggers>
+                            <DataTrigger TargetType="Button"
+                                         Binding="{Binding IsEnabled, Source={x:Reference ButtonCadastrar}}"
+                                         Value="True">
+                                <Setter Property="BackgroundColor"
+                                        Value="#A1D6B2" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
 
-        </Button>
+            </Button>
 
         </Grid>
 

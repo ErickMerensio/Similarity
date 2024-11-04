@@ -3,121 +3,111 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FingerprintComparisonApp.Login"
              Title="Login"
-             BackgroundColor="#DEE5D4"
-             >
+             BackgroundColor="#DEE5D4">
 
-        <!-- Layout Principal -->
+    <!-- Layout Principal -->
     <StackLayout VerticalOptions="Center">
         <Image x:Name="FullScreenImage"
-             Aspect="AspectFill"
-             IsVisible="False"
-             AbsoluteLayout.LayoutBounds="0,0,1,1"
-             AbsoluteLayout.LayoutFlags="All" />
-    <StackLayout VerticalOptions="Center" x:Name="MainContentLayout">
+               Aspect="AspectFill"
+               IsVisible="False"
+               AbsoluteLayout.LayoutBounds="0,0,1,1"
+               AbsoluteLayout.LayoutFlags="All" />
+        <StackLayout VerticalOptions="Center"
+                     x:Name="MainContentLayout">
 
 
-        <Grid RowSpacing="20">
+            <Grid RowSpacing="20">
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="*" />
+
                 </Grid.RowDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <!-- Título -->
-            <Label Text="Login" 
-                   x:Name="labelLogin"
-                   FontSize="24" 
-                   FontAttributes="Bold"
-                   TextColor="black"
-                   Margin="0,0,0,20"
-                   Grid.Row="1"
-                   MaximumWidthRequest="500"
-                   />
+                <!-- Título -->
+                <Label Text="Login"
+                       x:Name="labelLogin"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="black"
+                       Margin="0,0,0,20"
+                       Grid.Row="0"
+                       MaximumWidthRequest="500" />
 
-            <!-- Campo para o nome -->
-            <Entry x:Name="EntryNome"
-                   Placeholder="Digite seu nome"
-                   FontSize="18"
-                   Margin="0,0,0,20"
-                   TextColor="black"
-                   Grid.Row="2"
-                   MaximumWidthRequest="500"
-                   />
+                <!-- Campo para o nome -->
+                <Frame x:Name="frameNome"
+                       HasShadow="False"
+                       BorderColor="Black"
+                       CornerRadius="5"
+                       Padding="0"
+                       Margin="0"
+                       BackgroundColor="#DEE5D4"
+                       Grid.Row="1"
+                       MaximumWidthRequest="500">
+                    <Entry x:Name="EntryNome"
+                           Placeholder="Digite seu nome"
+                           FontSize="18"
+                           TextColor="black"
+                           Grid.Row="1"
+                           MaximumWidthRequest="500" />
+                </Frame>
 
-            <!-- Seção de seleção de impressões digitais -->
+                <!-- Seção de seleção de impressões digitais -->
 
-            <Button Text="Selecionar Digital" 
-                    x:Name="buttonSelecionar"
-                    Clicked="OnSelectImage1Clicked"
-                    BackgroundColor="#A1D6B2"
-                    BorderWidth="2"
-                    BorderColor="black"
-                    Margin="0,0,0,20"
-                    Grid.Row="3"
-                    MaximumWidthRequest="500"
-                    />
-            <Label x:Name="LabelImage1"  Text="Imagem: Nenhuma selecionada"
-                    FontSize="16"
-                   Margin="0,0,0,20"
-                   TextColor="black"
-                   Grid.Row="4"
-                   MaximumWidthRequest="500"
-                   />
+                <Button Text="Selecionar Digital"
+                        x:Name="buttonSelecionar"
+                        Clicked="OnSelectImage1Clicked"
+                        BackgroundColor="#A1D6B2"
+                        BorderWidth="2"
+                        TextColor="black"
+                        BorderColor="black"
+                        Margin="0,0,0,20"
+                        Grid.Row="2"
+                        MaximumWidthRequest="500" />
+                <Label x:Name="LabelImage1"
+                       Text="Imagem: Nenhuma selecionada"
+                       FontSize="16"
+                       Margin="0,0,0,20"
+                       TextColor="black"
+                       Grid.Row="3"
+                       MaximumWidthRequest="500" />
 
-            <Button 
-                Text="Biometria"
-                x:Name="buttonBiometria"
-                FontAttributes="Bold"
-                SemanticProperties.Hint="Click to authenticate with your fingerprint"
-                Clicked="OnBiometricClicked"
-                IsVisible="{OnPlatform Android=true, Default=false}"
-                Grid.Row="5"
-                MaximumWidthRequest="500"
-                />
-
-
-            <Button Text="Login" 
-                    Clicked="OnCompareFingerprintsClicked" 
-                    IsEnabled="False" 
-                    x:Name="ButtonCompare"
-                    BorderColor="black"
-                    BorderWidth="2"
-                    BackgroundColor="#A1D6B2"
-                    TextColor="Black"
-                    Grid.Row="10"
-                    MaximumWidthRequest="500"
-                    />
+                <Button Text="Login"
+                        Clicked="OnCompareFingerprintsClicked"
+                        IsEnabled="False"
+                        x:Name="ButtonCompare"
+                        BorderColor="black"
+                        BorderWidth="4"
+                        BackgroundColor="#A1D6B2"
+                        TextColor="Black"
+                        Grid.Row="10"
+                        MaximumWidthRequest="500" />
 
 
 
-    </Grid>
+            </Grid>
             <!-- Imagem selecionada (miniatura) -->
             <Image x:Name="ImageSelected"
                    AbsoluteLayout.LayoutBounds="0,0,1,1"
                    AbsoluteLayout.LayoutFlags="All"
-                   Aspect="AspectFit"
-                   
-                   />
+                   Aspect="AspectFit" />
 
             <!-- Resultado da comparação -->
-            <Label x:Name="LabelResult" Text="" 
-                   FontSize="20" 
+            <Label x:Name="LabelResult"
+                   Text=""
+                   FontSize="20"
                    TextColor="Green" />
 
-            <Label x:Name="SelectedImageNameLabel"    
-               FontSize="16" />
+            <Label x:Name="SelectedImageNameLabel"
+                   FontSize="16" />
         </StackLayout>
     </StackLayout>
 

@@ -58,9 +58,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Images\fingersprint1.jpeg" />
-	  <None Remove="Resources\Images\fingersprint2.png" />
-	  <None Remove="Resources\Images\fingersprint3.png" />
+		<None Remove="Resources\Images\fingersprint1.jpeg" />
+		<None Remove="Resources\Images\fingersprint2.png" />
+		<None Remove="Resources\Images\fingersprint3.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -77,21 +77,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="View\AcessoLiberado.xaml.cs">
-	    <DependentUpon>AcessoLiberado.xaml</DependentUpon>
-	  </Compile>
+		<Compile Update="View\AcessoLiberado.xaml.cs">
+			<DependentUpon>AcessoLiberado.xaml</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="View\AcessoLiberado.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\Cadastro.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\Login.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+		<MauiXaml Update="View\AcessoLiberado.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="View\Cadastro.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="View\Login.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	</ItemGroup>
 
 </Project>

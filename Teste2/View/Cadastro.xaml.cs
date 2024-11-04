@@ -43,18 +43,18 @@ public partial class Cadastro : ContentPage
         {
             imagePath1 = System.IO.Path.GetFullPath(imagePath1);
             await DisplayAlert("Sucesso", "Impressão Digital adicionada com Sucesso!.", "OK");
-            ValidateForm(); 
+            ValidateForm();
         }
     }
 
     private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
     {
-        ValidateForm(); 
+        ValidateForm();
     }
 
     private void OnPickerSelectedIndexChanged(object sender, EventArgs e)
     {
-        ValidateForm(); 
+        ValidateForm();
     }
 
     private void ValidateForm()
@@ -92,5 +92,6 @@ public partial class Cadastro : ContentPage
         ButtonCadastrar.WidthRequest = this.Width * 0.8;
         framePicker.WidthRequest = this.Width * 0.8;
         labelPicker.WidthRequest = this.Width * 0.8;
+        frameNome.WidthRequest = this.Width * 0.8;
     }
 }

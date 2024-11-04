@@ -15,61 +15,53 @@
 
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            
-        <Label Text="Digital Printing"
-               FontSize="24"
-               HorizontalOptions="Center"
-               FontAttributes="Bold"
-               TextColor="black"
-               Margin="0,0,0,20"
-               Grid.Row="1"
-               Grid.Column="1"
-               />
 
-        <Border 
-                x:Name="linha"
-                Margin="0,0,0,20"
-                Grid.Row="2"
-                Grid.Column="1"
-                />
-            
+            <Label Text="Digital Printing"
+                   FontSize="24"
+                   HorizontalOptions="Center"
+                   FontAttributes="Bold"
+                   TextColor="black"
+                   Margin="0,0,0,20"
+                   Grid.Row="0" />
+
+            <Border x:Name="linha"
+                    Margin="0,0,0,20"
+                    Grid.Row="1" />
+
             <Button x:Name="cadastroButton"
                     Clicked="OnCadastroButtonClicked"
-                Text="Cadastro" 
-                Grid.Row="4" 
-                Grid.Column="1" 
-                Margin="0,20,0,0"
-                BackgroundColor="#A1D6B2"
-                TextColor="black"
-                BorderWidth="2"
-                BorderColor="black"
-                    MaximumWidthRequest="400"
-                
- />
+                    Text="Cadastro"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Margin="0,20,0,0"
+                    BackgroundColor="#A1D6B2"
+                    TextColor="black"
+                    BorderWidth="2"
+                    BorderColor="black"
+                    MaximumWidthRequest="400" />
 
             <Button x:Name="loginButton"
-                   Clicked="OnLoginButtonClicked"
-                Text="Login" 
-                Grid.Row="5" 
-                Grid.Column="1"
-                  Margin="0,20,0,0"
-                BackgroundColor="#A1D6B2"
-                TextColor="black"
-                BorderWidth="2"
-                BorderColor="black"
-                    MaximumWidthRequest="400"
-                    />
+                    Clicked="OnLoginButtonClicked"
+                    Text="Login"
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Margin="0,20,0,0"
+                    BackgroundColor="#A1D6B2"
+                    TextColor="black"
+                    BorderWidth="2"
+                    BorderColor="black"
+                    MaximumWidthRequest="400" />
         </Grid>
 
 
