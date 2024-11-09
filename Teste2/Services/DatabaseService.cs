@@ -1,7 +1,4 @@
 ﻿using Microsoft.Data.Sqlite;
-using System;
-using System.Collections.Generic;
-using System.IO;
 
 public class DatabaseService
 {
@@ -42,7 +39,6 @@ public class DatabaseService
                 )";
             command.ExecuteNonQuery();
 
-            // Verifica se há registros no banco
             command.CommandText = "SELECT COUNT(*) FROM Fingerprints";
             long count = (long)command.ExecuteScalar();
 
@@ -57,7 +53,7 @@ public class DatabaseService
         }
         finally
         {
-            connection.Close(); // Fecha a conexão após a inicialização
+            connection.Close(); 
         }
     }
 
@@ -81,11 +77,10 @@ public class DatabaseService
         }
         finally
         {
-            connection.Close(); // Fecha a conexão após a adição de amostras
+            connection.Close(); 
         }
     }
 
-    // Método para adicionar impressões digitais no banco de dados
     public void AddFingerprint(string imagePath, string nome, string cargo)
     {
         try
@@ -109,7 +104,6 @@ public class DatabaseService
         }
     }
 
-    // Método para obter todas as impressões digitais do banco de dados
     public List<(string ImagePath, string Nome, string Cargo)> GetAllFingerprints()
     {
         List<(string ImagePath, string Nome, string Cargo)> fingerprints = new List<(string, string, string)>();
@@ -141,7 +135,6 @@ public class DatabaseService
         {
             connection.Close();
         }
-
         return fingerprints;
     }
 }

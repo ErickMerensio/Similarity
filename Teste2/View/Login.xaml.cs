@@ -1,11 +1,7 @@
-using Microsoft.Maui.Storage;
 using OpenCvSharp;
 using OpenCvSharp.Features2D;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
 using Size = OpenCvSharp.Size;
-using Plugin.Fingerprint.Abstractions;
+
 
 namespace FingerprintComparisonApp;
 
@@ -74,13 +70,23 @@ public partial class Login : ContentPage
                 return false;
             }
 
-            // Pré-processamento das imagens
             Cv2.GaussianBlur(img1, img1, new Size(5, 5), 0);
             Cv2.GaussianBlur(img2, img2, new Size(5, 5), 0);
             Cv2.EqualizeHist(img1, img1);
             Cv2.EqualizeHist(img2, img2);
 
-            // Inicializa o detector SIFT
+            Cv2.Threshold(img1, img1, 0, 255, ThresholdTypes.Otsu);
+            Cv2.Threshold(img2, img2, 0, 255, ThresholdTypes.Otsu);
+
+            Cv2.Canny(img1, img1, 100, 200);
+            Cv2.Canny(img2, img2, 100, 200);
+
+            var contours1 = Cv2.FindContoursAsMat(img1, RetrievalModes.External, ContourApproximationModes.ApproxSimple);
+            var contours2 = Cv2.FindContoursAsMat(img2, RetrievalModes.External, ContourApproximationModes.ApproxSimple);
+
+            Cv2.DrawContours(img1, contours1, -1, new Scalar(255, 0, 0), 2);
+            Cv2.DrawContours(img2, contours2, -1, new Scalar(255, 0, 0), 2);
+
             var sift = SIFT.Create();
             KeyPoint[] keypoints1, keypoints2;
             Mat descriptors1 = new Mat(), descriptors2 = new Mat();
@@ -100,27 +106,40 @@ public partial class Login : ContentPage
             }
 
             double matchPercentage = goodMatches.Count / (double)keypoints1.Length;
-            if (matchPercentage > 0.15) // Ajuste conforme necessário
+            if (matchPercentage > 0.15) 
             {
                 Mat matchImage = await CreateMatchImage(img1, img2, goodMatches, keypoints1, keypoints2);
                 string matchImagePath = Path.Combine(FileSystem.CacheDirectory, "matchImage.jpg");
                 matchImage.SaveImage(matchImagePath);
 
-                // Define a imagem de comparação como a
-                // e para FullScreenImage
                 FullScreenImage.Source = ImageSource.FromFile(matchImagePath);
-                FullScreenImage.IsVisible = true; // Torna a imagem visível
-                MainContentLayout.IsVisible = false; // Oculta o layout principal
+                FullScreenImage.IsVisible = true; 
+                MainContentLayout.IsVisible = false; 
 
-                return true; // Indica que houve uma correspondência
+                return true; 
             }
-            return false; // Nenhuma correspondência encontrada
+            return false; 
         }
         catch (Exception ex)
         {
             await DisplayAlert("Erro", $"Falha ao comparar as impressões digitais: {ex.Message}", "OK");
             return false;
         }
+    }
+
+    private void OnPickerSelectedIndexChanged(object sender, EventArgs e)
+    {
+        ValidateForm();
+    }
+
+    private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
+    {
+        ValidateForm();
+    }
+
+    private void ValidateForm()
+    {
+        ButtonCompare.IsEnabled = !string.IsNullOrEmpty(EntryNome.Text) && !string.IsNullOrEmpty(imagePath1);
     }
 
     async void OnCompareFingerprintsClicked(object sender, EventArgs e)
@@ -161,11 +180,15 @@ public partial class Login : ContentPage
 
     private void OnPageSizeChanged(object sender, EventArgs e)
     {
-        // Definindo o WidthRequest do botão para 50% da largura da tela
         labelLogin.WidthRequest = this.Width * 0.8;
         EntryNome.WidthRequest = this.Width * 0.8;
         buttonSelecionar.WidthRequest = this.Width * 0.8;
         LabelImage1.WidthRequest = this.Width * 0.8;
         ButtonCompare.WidthRequest = this.Width * 0.8;
+    }
+
+    private async void ImageButton_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
     }
 }

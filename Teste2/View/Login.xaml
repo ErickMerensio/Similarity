@@ -5,7 +5,6 @@
              Title="Login"
              BackgroundColor="#DEE5D4">
 
-    <!-- Layout Principal -->
     <StackLayout VerticalOptions="Center">
         <Image x:Name="FullScreenImage"
                Aspect="AspectFill"
@@ -23,26 +22,31 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="100" />
                     <RowDefinition Height="*" />
 
                 </Grid.RowDefinitions>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+                <ImageButton Source="logoaps.png"
+                             Clicked="ImageButton_Clicked"
+                             WidthRequest="70"
+                             HeightRequest="70"
+                             HorizontalOptions="Start"
+                             VerticalOptions="Start"
+                             Margin="30,-60,0,0"
+                             BackgroundColor="#DEE5D4"
+                             Grid.Row="0" />
 
-                <!-- Título -->
                 <Label Text="Login"
                        x:Name="labelLogin"
                        FontSize="24"
                        FontAttributes="Bold"
                        TextColor="black"
                        Margin="0,0,0,20"
-                       Grid.Row="0"
+                       Grid.Row="1"
                        MaximumWidthRequest="500" />
 
-                <!-- Campo para o nome -->
                 <Frame x:Name="frameNome"
                        HasShadow="False"
                        BorderColor="Black"
@@ -50,17 +54,15 @@
                        Padding="0"
                        Margin="0"
                        BackgroundColor="#DEE5D4"
-                       Grid.Row="1"
+                       Grid.Row="2"
                        MaximumWidthRequest="500">
                     <Entry x:Name="EntryNome"
                            Placeholder="Digite seu nome"
                            FontSize="18"
                            TextColor="black"
-                           Grid.Row="1"
+                           Grid.Row="2"
                            MaximumWidthRequest="500" />
                 </Frame>
-
-                <!-- Seção de seleção de impressões digitais -->
 
                 <Button Text="Selecionar Digital"
                         x:Name="buttonSelecionar"
@@ -70,14 +72,14 @@
                         TextColor="black"
                         BorderColor="black"
                         Margin="0,0,0,20"
-                        Grid.Row="2"
+                        Grid.Row="3"
                         MaximumWidthRequest="500" />
                 <Label x:Name="LabelImage1"
                        Text="Imagem: Nenhuma selecionada"
                        FontSize="16"
                        Margin="0,0,0,20"
                        TextColor="black"
-                       Grid.Row="3"
+                       Grid.Row="4"
                        MaximumWidthRequest="500" />
 
                 <Button Text="Login"
@@ -85,22 +87,33 @@
                         IsEnabled="False"
                         x:Name="ButtonCompare"
                         BorderColor="black"
-                        BorderWidth="4"
-                        BackgroundColor="#A1D6B2"
+                        BorderWidth="5"
                         TextColor="Black"
-                        Grid.Row="10"
-                        MaximumWidthRequest="500" />
-
+                        Grid.Row="6"
+                        MaximumWidthRequest="500">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button"
+                                     Binding="{Binding IsEnabled, Source={x:Reference ButtonCompare}}"
+                                     Value="False">
+                            <Setter Property="BackgroundColor"
+                                    Value="Gray" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Button"
+                                     Binding="{Binding IsEnabled, Source={x:Reference ButtonCompare}}"
+                                     Value="True">
+                            <Setter Property="BackgroundColor"
+                                    Value="#A1D6B2" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
 
 
             </Grid>
-            <!-- Imagem selecionada (miniatura) -->
             <Image x:Name="ImageSelected"
                    AbsoluteLayout.LayoutBounds="0,0,1,1"
                    AbsoluteLayout.LayoutFlags="All"
                    Aspect="AspectFit" />
 
-            <!-- Resultado da comparação -->
             <Label x:Name="LabelResult"
                    Text=""
                    FontSize="20"

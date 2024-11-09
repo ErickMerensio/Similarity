@@ -1,5 +1,3 @@
-using static OpenCvSharp.ML.DTrees;
-
 namespace FingerprintComparisonApp;
 
 public partial class AcessoLiberado : ContentPage
@@ -8,7 +6,8 @@ public partial class AcessoLiberado : ContentPage
     {
         InitializeComponent();
         NomeLabel.Text = $"Nome: {nome}";
-        CargoLabel.Text = $"Cargo: {cargo}";
+        CargoLabel.Text = $"Cargo: {(cargo == "Nível 1" ? (cargo == "Nível 2" ? "Civil" : "Diretor de divisão") 
+            : "Ministro do meio ambiente")}";
         NavigationPage.SetHasBackButton(this, false);
         this.SizeChanged += OnPageSizeChanged;
     }
@@ -24,7 +23,6 @@ public partial class AcessoLiberado : ContentPage
 
     private void OnPageSizeChanged(object sender, EventArgs e)
     {
-        // Definindo o WidthRequest do botão para 50% da largura da tela
         labelAcesso.WidthRequest = this.Width * 0.8;
         NomeLabel.WidthRequest = this.Width * 0.8;
         CargoLabel.WidthRequest = this.Width * 0.8;

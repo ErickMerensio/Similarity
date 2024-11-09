@@ -6,15 +6,9 @@
              BackgroundColor="#DEE5D4">
 
     <StackLayout VerticalOptions="Center">
-
-
-
-        <!-- Título -->
-
-        <!-- Botão para Cadastro -->
-
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="100" />
@@ -23,27 +17,27 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <Label Text="Digital Printing"
+            <Image Source="logoaps.png"
+                   WidthRequest="200"
+                   HeightRequest="200"
+                   Grid.Row="0" />
+            
+            <Label Text="Similarity"
                    FontSize="24"
                    HorizontalOptions="Center"
                    FontAttributes="Bold"
                    TextColor="black"
                    Margin="0,0,0,20"
-                   Grid.Row="0" />
+                   Grid.Row="1" />
 
             <Border x:Name="linha"
                     Margin="0,0,0,20"
-                    Grid.Row="1" />
+                    Grid.Row="2" />
 
             <Button x:Name="cadastroButton"
                     Clicked="OnCadastroButtonClicked"
                     Text="Cadastro"
-                    Grid.Row="3"
-                    Grid.Column="1"
+                    Grid.Row="4"
                     Margin="0,20,0,0"
                     BackgroundColor="#A1D6B2"
                     TextColor="black"
@@ -54,8 +48,7 @@
             <Button x:Name="loginButton"
                     Clicked="OnLoginButtonClicked"
                     Text="Login"
-                    Grid.Row="4"
-                    Grid.Column="1"
+                    Grid.Row="5"
                     Margin="0,20,0,0"
                     BackgroundColor="#A1D6B2"
                     TextColor="black"
@@ -63,9 +56,5 @@
                     BorderColor="black"
                     MaximumWidthRequest="400" />
         </Grid>
-
-
-
-
     </StackLayout>
 </ContentPage>

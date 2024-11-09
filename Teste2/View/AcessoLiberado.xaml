@@ -7,7 +7,6 @@
     <StackLayout VerticalOptions="Center">
 
         <Grid>
-
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -15,10 +14,6 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
 
             <Label x:Name="labelAcesso"
                    Text="Acesso liberado!"
@@ -44,12 +39,12 @@
             <Button x:Name="buttonBack"
                     Text="Voltar ao inicio"
                     BackgroundColor="#A1D6B2"
+                    TextColor="black"
                     BorderWidth="2"
                     BorderColor="black"
                     Clicked="Button_Clicked"
                     Grid.Row="4"
                     MaximumWidthRequest="400" />
-
         </Grid>
     </StackLayout>
 </ContentPage>

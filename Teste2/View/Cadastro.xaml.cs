@@ -1,5 +1,3 @@
-using Microsoft.Maui.Controls.Shapes;
-
 namespace FingerprintComparisonApp;
 
 public partial class Cadastro : ContentPage
@@ -77,14 +75,11 @@ public partial class Cadastro : ContentPage
 
         dbService.AddFingerprint(imagePath1, nome, cargo);
         await DisplayAlert("Sucesso", "Cadastrado com Sucesso!", "OK");
-
-        // Volta para a MainPage
         await Navigation.PopToRootAsync();
     }
 
     private void OnPageSizeChanged(object sender, EventArgs e)
     {
-        // Definindo o WidthRequest do botão para 50% da largura da tela
         labelCadastro.WidthRequest = this.Width * 0.8;
         EntryNome.WidthRequest = this.Width * 0.8;
         CargoPicker.WidthRequest = this.Width * 0.8;
@@ -93,5 +88,10 @@ public partial class Cadastro : ContentPage
         framePicker.WidthRequest = this.Width * 0.8;
         labelPicker.WidthRequest = this.Width * 0.8;
         frameNome.WidthRequest = this.Width * 0.8;
+    }
+
+    private async void ImageButton_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PopToRootAsync();
     }
 }
