@@ -2,7 +2,7 @@ using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 using System;
 
-namespace Teste2
+namespace Similarity
 {
     internal class Program : MauiApplication
     {

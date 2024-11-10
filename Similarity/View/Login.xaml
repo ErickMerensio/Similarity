@@ -8,11 +8,12 @@
     <StackLayout VerticalOptions="Center">
         <Image x:Name="FullScreenImage"
                Aspect="AspectFill"
-               IsVisible="False"
+               IsVisible="True"
                AbsoluteLayout.LayoutBounds="0,0,1,1"
                AbsoluteLayout.LayoutFlags="All" />
         <StackLayout VerticalOptions="Center"
-                     x:Name="MainContentLayout">
+                     x:Name="MainContentLayout"
+                     IsVisible="True">
 
 
             <Grid RowSpacing="20">
@@ -28,7 +29,8 @@
 
                 </Grid.RowDefinitions>
 
-                <ImageButton Source="logoaps.png"
+                <ImageButton x:Name="logo"
+                             Source="logoaps.png"
                              Clicked="ImageButton_Clicked"
                              WidthRequest="70"
                              HeightRequest="70"
@@ -121,7 +123,39 @@
 
             <Label x:Name="SelectedImageNameLabel"
                    FontSize="16" />
+
+
         </StackLayout>
+
+        <StackLayout x:Name="carregandoView"
+                     IsVisible="False"
+                     VerticalOptions="Center"
+                     HorizontalOptions="Center">
+
+            <Label Text="Carregando..."
+                   TextColor="Black"
+                   Margin="0, 0, 0, 10"
+                   FontSize="20" />
+
+            <Ellipse WidthRequest="50"
+                     HeightRequest="50"
+                     StrokeThickness="5"
+                     StrokeDashArray="0, 1"
+                     x:Name="loaderCircle"
+                     Rotation="0"
+                     Stroke="Red">
+
+                <Ellipse.Fill>
+                    <SolidColorBrush Color="Green" />
+                </Ellipse.Fill>
+
+            </Ellipse>
+        </StackLayout>
+
+
+
+
     </StackLayout>
+
 
 </ContentPage>

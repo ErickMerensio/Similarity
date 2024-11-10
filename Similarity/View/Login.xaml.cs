@@ -1,3 +1,4 @@
+using Microsoft.Maui.Controls.Shapes;
 using OpenCvSharp;
 using OpenCvSharp.Features2D;
 using Size = OpenCvSharp.Size;
@@ -10,6 +11,7 @@ public partial class Login : ContentPage
     private readonly DatabaseService dbService;
     private string selectedImagePath;
     private string imagePath1;
+    private bool carregando = false;
 
     public Login()
     {
@@ -52,8 +54,8 @@ public partial class Login : ContentPage
         imagePath1 = await PickImageAsync();
         if (!string.IsNullOrEmpty(imagePath1))
         {
-            imagePath1 = Path.GetFullPath(imagePath1);
-            LabelImage1.Text = $"Imagem 1: {Path.GetFileName(imagePath1)}";
+            imagePath1 = System.IO.Path.GetFullPath(imagePath1);
+            LabelImage1.Text = $"Imagem 1: {System.IO.Path.GetFileName(imagePath1)}";
             ButtonCompare.IsEnabled = true;
         }
     }
@@ -109,7 +111,7 @@ public partial class Login : ContentPage
             if (matchPercentage > 0.15)
             {
                 Mat matchImage = await CreateMatchImage(img1, img2, goodMatches, keypoints1, keypoints2);
-                string matchImagePath = Path.Combine(FileSystem.CacheDirectory, "matchImage.jpg");
+                string matchImagePath = System.IO.Path.Combine(FileSystem.CacheDirectory, "matchImage.jpg");
                 matchImage.SaveImage(matchImagePath);
 
                 FullScreenImage.Source = ImageSource.FromFile(matchImagePath);
@@ -144,9 +146,11 @@ public partial class Login : ContentPage
 
     async void OnCompareFingerprintsClicked(object sender, EventArgs e)
     {
+        loading();
         if (string.IsNullOrEmpty(EntryNome.Text))
         {
             await DisplayAlert("Erro", "Por favor, digite seu nome.", "OK");
+            carregando = false;
             return;
         }
 
@@ -185,10 +189,30 @@ public partial class Login : ContentPage
         buttonSelecionar.WidthRequest = this.Width * 0.8;
         LabelImage1.WidthRequest = this.Width * 0.8;
         ButtonCompare.WidthRequest = this.Width * 0.8;
+        frameNome.WidthRequest = this.Width * 0.8;
     }
 
     private async void ImageButton_Clicked(object sender, EventArgs e)
     {
         await Navigation.PopAsync();
     }
+
+    void loading()
+    {
+        carregandoView.IsVisible = true;
+        MainContentLayout.IsVisible = false;
+        StartSpinnerAnimation();
+    }
+
+    private void StartSpinnerAnimation()
+    {
+        var rotationAnimation = new Animation(v => loaderCircle.Rotation = v, 0, 360);
+
+        rotationAnimation.Commit(this, "LoaderRotation", length: 1000, repeat: () => true, finished: (v, c) => { });
+    }
+
+
+
+
+
 }
