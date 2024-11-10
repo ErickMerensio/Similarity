@@ -11,7 +11,7 @@ public partial class Login : ContentPage
     private readonly DatabaseService dbService;
     private string selectedImagePath;
     private string imagePath1;
-    private bool carregando = false;
+    private bool carregando = true;
 
     public Login()
     {
@@ -146,11 +146,14 @@ public partial class Login : ContentPage
 
     async void OnCompareFingerprintsClicked(object sender, EventArgs e)
     {
+        this.carregando = true;
         loading();
+        await Task.Delay(1000);
         if (string.IsNullOrEmpty(EntryNome.Text))
         {
+            this.carregando = false;
+            loading();
             await DisplayAlert("Erro", "Por favor, digite seu nome.", "OK");
-            carregando = false;
             return;
         }
 
@@ -167,8 +170,10 @@ public partial class Login : ContentPage
                     if (isMatch)
                     {
                         accessGranted = true;
-                        await Task.Delay(4000);
+                        await Task.Delay(2000);
                         await Navigation.PushAsync(new AcessoLiberado(EntryNome.Text, fingerprint.Cargo));
+                        this.carregando = false;
+                        loading();
                         return;
                     }
                 }
@@ -176,6 +181,8 @@ public partial class Login : ContentPage
 
             if (!accessGranted)
             {
+                this.carregando = false;
+                loading();
                 await DisplayAlert("Acesso Negado!", "Impressão digital ou nome não encontrado no banco de dados.", "OK");
                 FullScreenImage.IsVisible = false;
             }
@@ -199,9 +206,16 @@ public partial class Login : ContentPage
 
     void loading()
     {
-        carregandoView.IsVisible = true;
-        MainContentLayout.IsVisible = false;
-        StartSpinnerAnimation();
+        if (carregando == true)
+        {
+            carregandoView.IsVisible = true;
+            MainContentLayout.IsVisible = false;
+            StartSpinnerAnimation();
+        } else
+        {
+            carregandoView.IsVisible = false;
+            MainContentLayout.IsVisible = true;
+        }
     }
 
     private void StartSpinnerAnimation()
