@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace Teste2
+namespace Similarity
 {
     public static class MauiProgram
     {

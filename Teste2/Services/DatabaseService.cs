@@ -53,7 +53,7 @@ public class DatabaseService
         }
         finally
         {
-            connection.Close(); 
+            connection.Close();
         }
     }
 
@@ -77,7 +77,7 @@ public class DatabaseService
         }
         finally
         {
-            connection.Close(); 
+            connection.Close();
         }
     }
 

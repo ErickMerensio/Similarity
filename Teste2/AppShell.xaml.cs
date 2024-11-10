@@ -1,4 +1,4 @@
-﻿namespace Teste2
+﻿namespace Similarity
 {
     public partial class AppShell : Shell
     {

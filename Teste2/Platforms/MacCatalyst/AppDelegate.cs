@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace Teste2
+namespace Similarity
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

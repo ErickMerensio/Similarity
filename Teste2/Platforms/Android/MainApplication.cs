@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace Teste2
+namespace Similarity
 {
     [Application]
     public class MainApplication : MauiApplication

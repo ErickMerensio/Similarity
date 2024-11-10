@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Shell x:Class="Teste2.AppShell"
+<Shell x:Class="Similarity.AppShell"
        xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:local="clr-namespace:FingerprintComparisonApp"
+       xmlns:local="clr-namespace:Similarity"
        Shell.FlyoutBehavior="Disabled"
-       Title="Teste2">
+       Title="Similarity">
 
     <ShellContent Title="Home"
                   ContentTemplate="{DataTemplate local:MainPage}"

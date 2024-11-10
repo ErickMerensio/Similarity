@@ -3,7 +3,7 @@ using OpenCvSharp.Features2D;
 using Size = OpenCvSharp.Size;
 
 
-namespace FingerprintComparisonApp;
+namespace Similarity;
 
 public partial class Login : ContentPage
 {
@@ -106,19 +106,19 @@ public partial class Login : ContentPage
             }
 
             double matchPercentage = goodMatches.Count / (double)keypoints1.Length;
-            if (matchPercentage > 0.15) 
+            if (matchPercentage > 0.15)
             {
                 Mat matchImage = await CreateMatchImage(img1, img2, goodMatches, keypoints1, keypoints2);
                 string matchImagePath = Path.Combine(FileSystem.CacheDirectory, "matchImage.jpg");
                 matchImage.SaveImage(matchImagePath);
 
                 FullScreenImage.Source = ImageSource.FromFile(matchImagePath);
-                FullScreenImage.IsVisible = true; 
-                MainContentLayout.IsVisible = false; 
+                FullScreenImage.IsVisible = true;
+                MainContentLayout.IsVisible = false;
 
-                return true; 
+                return true;
             }
-            return false; 
+            return false;
         }
         catch (Exception ex)
         {

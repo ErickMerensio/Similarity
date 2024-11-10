@@ -1,4 +1,4 @@
-﻿namespace FingerprintComparisonApp
+﻿namespace Similarity
 {
     public partial class MainPage : ContentPage
     {

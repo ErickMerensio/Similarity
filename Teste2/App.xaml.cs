@@ -1,6 +1,6 @@
-﻿using FingerprintComparisonApp;
+﻿using Similarity;
 
-namespace Teste2
+namespace Similarity
 {
     public partial class App : Application
     {

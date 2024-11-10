@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FingerprintComparisonApp.Cadastro"
+             x:Class="Similarity.Cadastro"
              Title="Cadastro"
              BackgroundColor="#DEE5D4">
 
@@ -19,8 +19,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <ImageButton 
-                         Source="logoaps.png"
+            <ImageButton Source="logoaps.png"
                          Clicked="ImageButton_Clicked"
                          WidthRequest="70"
                          HeightRequest="70"

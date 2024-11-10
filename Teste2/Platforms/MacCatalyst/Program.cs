@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace Teste2
+namespace Similarity
 {
     public class Program
     {
